@@ -1,13 +1,13 @@
 import com.sun.source.tree.Tree;
 
-class TreeNode {
-    int val;
-    TreeNode left, right;
-    TreeNode(int val) {
-        this.val = val;
-    }
-}
 public class MaxPathSumBinaryTree {
+    public static class TreeNode {
+        int val;
+        TreeNode left, right;
+        TreeNode(int val) {
+            this.val = val;
+        }
+    }
     static int maxSum;
 
     public static int maxPathSum(TreeNode root) {
