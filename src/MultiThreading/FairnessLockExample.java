@@ -1,15 +1,13 @@
 package MultiThreading;
 
-import com.sun.jdi.event.ThreadDeathEvent;
-
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class UnfairLockExample {
-    private final Lock unfairLock = new ReentrantLock();
+public class FairnessLockExample {
+    private final Lock Lock = new ReentrantLock(true);
 
     public void accessResource(){
-        unfairLock.lock();
+        Lock.lock();
         try {
             System.out.println(Thread.currentThread().getName()+ " Acquire the lock");
             Thread.sleep(1000);
@@ -17,11 +15,11 @@ public class UnfairLockExample {
             Thread.currentThread().interrupt();
         }finally {
             System.out.println(Thread.currentThread().getName()+ " Released the lock");
-            unfairLock.unlock();
+            Lock.unlock();
         }
     }
     public static void main(String[] args) {
-        UnfairLockExample example = new UnfairLockExample();
+        FairnessLockExample example = new FairnessLockExample();
         Runnable task = new Runnable() {
             @Override
             public void run() {
@@ -33,8 +31,14 @@ public class UnfairLockExample {
         Thread t2 = new Thread(task, "t2");
         Thread t3 = new Thread(task, "t3");
 
-        t1.start();
-        t2.start();
-        t3.start();
+        try { // just for the understanding the fainess
+            t1.start();
+            Thread.sleep(50);
+            t2.start();
+            Thread.sleep(50);
+            t3.start();
+        }catch (Exception e){
+
+        }
     }
 }
