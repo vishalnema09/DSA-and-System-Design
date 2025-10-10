@@ -2,19 +2,21 @@ package MultiThreading;
 
 public class MyThread extends Thread {
 
+    public MyThread(String name){
+        super(name);
+    }
     @Override
     public void run() {
-        try {
-            Thread.sleep(1000);
-            System.out.println("Thread is running");
-        } catch (InterruptedException e) {
-            System.out.println("Thread Interrupted: "+ e);
+        for (int i = 0; i < 5; i++) {
+            System.out.println(Thread.currentThread().getName()+ " is running");
+            Thread.yield();// to give the change to another thread
         }
     }
 
     public static void main(String[] args) throws InterruptedException {
-        MyThread t1 = new MyThread();
+        MyThread t1 = new MyThread("t1");// change the name of thread
+        MyThread t2 = new MyThread("t2"); // change the name of thread
         t1.start();
-        t1.interrupt();
+        t2.start();
     }
 }
