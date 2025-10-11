@@ -44,7 +44,9 @@ class task2 implements Runnable{
 
     @Override
     public void run() {
-        paper.writeWithPaperAndPen(pen);
+        synchronized (pen){
+            paper.writeWithPaperAndPen(pen);
+        }
     }
 }
 
