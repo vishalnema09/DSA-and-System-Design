@@ -1,5 +1,8 @@
 package MultiThreading;
 
+interface Student {
+    public void getBio(String name);
+}
 
 public class LambdaExpressionExample {
     public static void main(String[] args) {
